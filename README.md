@@ -1,6 +1,6 @@
 # Text-to-SQL Assistant
 
-A production-style Natural Language to SQL assistant built with Python, OpenAI, and SQLite.
+A production-style Natural Language to SQL assistant built with Python, OpenAI, and SQLite. 
 
 ## Project Overview
 
