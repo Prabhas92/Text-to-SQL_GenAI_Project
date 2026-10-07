@@ -67,7 +67,16 @@ Rules:
 - Use the exact allowed values shown in the schema comments
   when filtering text columns.
 
-- If the question cannot be answered from this schema:
+- All standard SQLite features are available: aggregates
+  (COUNT, SUM, AVG, MIN, MAX), GROUP BY, HAVING, JOIN,
+  ORDER BY, LIMIT, subqueries, CTEs and window functions.
+  The schema only lists data, not SQL features.
+
+- A question is answerable whenever the needed data
+  (tables/columns) exists, even if it requires counting,
+  grouping, joining or ranking.
+
+- Only if the required DATA is missing from the schema:
   set is_answerable to false,
   set sql to an empty string,
   and explain what data is missing.
@@ -129,10 +138,8 @@ SQL_SCHEMA = {
 
     "properties": {
 
-        "is_answerable": {
-            "type": "boolean"
-        },
-
+        # SQL first: the model attempts the query before it
+        # explains or judges it.
         "sql": {
             "type": "string"
         },
@@ -146,6 +153,11 @@ SQL_SCHEMA = {
 
         "explanation": {
             "type": "string"
+        },
+
+        # Decided last, after the model has tried to write the SQL.
+        "is_answerable": {
+            "type": "boolean"
         },
     },
 
